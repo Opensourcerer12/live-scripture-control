@@ -142,6 +142,7 @@ select:focus, input:focus { border-color: #4a5b76; box-shadow: 0 0 0 3px rgb(74 
 .panel.stack .manual { flex: none; }
 .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
 .search { width: 100%; margin-bottom: 10px; }
+.search.search-small { padding: 6px 9px; font-size: 12px; margin-bottom: 8px; }
 .list { overflow: auto; min-height: 0; flex: 1; display: flex; flex-direction: column; gap: 6px; padding-right: 2px; }
 .row { display: flex; gap: 8px; }
 .row .search { margin-bottom: 0; }
@@ -161,6 +162,15 @@ select:focus, input:focus { border-color: #4a5b76; box-shadow: 0 0 0 3px rgb(74 
 .song-btn:hover { background: var(--panel-2); border-color: var(--line); }
 .song-btn.active { background: rgb(243 189 91 / 0.12); border-color: rgb(243 189 91 / 0.45); color: #fff; }
 .song-btn .n { font-size: 11px; color: var(--muted); }
+
+/* ---------- schedule (songs already queued in FreeShow) ---------- */
+.schedule { flex: none; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.schedule[hidden] { display: none; }
+.sched-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
+.sched-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.sched-list { display: flex; flex-direction: column; gap: 4px; overflow: auto; max-height: 210px; padding-right: 2px; }
+.sched-list .song-btn { padding: 5px 8px; font-size: 12.5px; border-radius: 8px; }
+.sched-list .song-btn .n { font-size: 10px; }
 
 .verse-list { gap: 8px; }
 .verse-btn {

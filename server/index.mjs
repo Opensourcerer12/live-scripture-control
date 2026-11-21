@@ -9,6 +9,7 @@ import { PUBLIC_DIR, DATA_DIR, loadConfig, saveConfig, readJson, writeJson, lanA
 import { FreeShow } from "./freeshow.mjs"
 import { outputWindows } from "./winoutput.mjs"
 import { listSongs, getSong } from "./library.mjs"
+import { currentSchedule } from "./schedule.mjs"
 import { lookup, availableTranslations, preview } from "./bible.mjs"
 import { suggest } from "./suggestions.mjs"
 
@@ -82,6 +83,30 @@ function refreshSongs() {
 	return result
 }
 
+/**
+ * The songs already queued in FreeShow's current project, in schedule order,
+ * matched against the song library. Rows that are not songs (videos, the app's
+ * own scratch show) are skipped, so the list only holds things this app can open.
+ */
+function schedulePayload() {
+	const view = currentSchedule(config.showsDir)
+	if (view.error) return { project: "", items: [], error: view.error }
+	if (!view.project) return { project: "", items: [], error: null }
+
+	const byId = new Map(songs.map((song) => [String(song.id), song]))
+	const items = []
+	const seen = new Set()
+	for (const id of view.showIds) {
+		const song = byId.get(id)
+		if (!song || seen.has(id)) continue
+		if (song.name === config.freeshow.showName) continue
+		seen.add(id)
+		items.push({ id: song.id, name: song.name, verseCount: song.verses.length })
+	}
+
+	return { project: view.project.name, items, error: null }
+}
+
 function bindingItem(current) {
 	const binding = bindings[bindingKey(current.songId, current.verseIndex)]
 	if (!binding) return null
@@ -135,6 +160,7 @@ function publicState({ includePin = false } = {}) {
 		freeshow: health,
 		songs: songs.filter((song) => song.name !== config.freeshow.showName).map((song) => ({ id: song.id, name: song.name, verseCount: song.verses.length })),
 		songsError,
+		schedule: schedulePayload(),
 		clients: wss ? wss.clients.size : 0
 	}
 	if (includePin) {
@@ -826,7 +852,23 @@ server.listen(config.appPort, config.appHost, async () => {
 	broadcast()
 })
 
-setInterval(() => checkHealth({ silent: false }).catch(() => {}), 15_000)
+// FreeShow rewrites projects.json when a song is added to the schedule; pick that up
+// without waiting for the next action, so the "In the schedule" list stays current.
+let scheduleSignature = ""
+function currentScheduleSignature() {
+	const view = currentSchedule(config.showsDir)
+	return `${view.project?.id || ""}|${view.showIds.join(",")}`
+}
+scheduleSignature = currentScheduleSignature()
+
+setInterval(() => {
+	checkHealth({ silent: false }).catch(() => {})
+	const signature = currentScheduleSignature()
+	if (signature !== scheduleSignature) {
+		scheduleSignature = signature
+		broadcast()
+	}
+}, 15_000)
 
 process.on("SIGINT", () => {
 	saveConfig(config)

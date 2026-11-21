@@ -28,7 +28,14 @@
 		<main class="pc-grid">
 			<section class="panel">
 				<div class="panel-head"><h2>Songs</h2><span id="songCount" class="count"></span></div>
-				<input id="songSearch" class="search" placeholder="Search songs" autocomplete="off" />
+				<div id="scheduleBlock" class="schedule" hidden>
+					<div class="sched-head">
+						<span class="sched-label">In the schedule</span>
+						<span id="schedName" class="count"></span>
+					</div>
+					<div id="scheduleList" class="sched-list"></div>
+				</div>
+				<input id="songSearch" class="search search-small" placeholder="Search all songs" autocomplete="off" />
 				<div id="songList" class="list"></div>
 			</section>
 

@@ -3,7 +3,8 @@
 A local web app for the FreeShow PC. It shows the song list, the verses of the current song,
 3–5 scripture suggestions, and puts a chosen passage on screen through FreeShow's own API.
 
-- **PC view** — `http://localhost:8099` — songs, verses, suggestions, manual reference, lock, clear.
+- **PC view** — `http://localhost:8099` — the songs already in FreeShow's current project, a
+  search over the whole song library, verses, suggestions, manual reference, lock, clear.
 - **Phone view** — `http://<lan-ip>:8099/phone` — one large live card, big suggestion buttons,
   always-visible CLEAR, plus a song/verse picker. Phones pair with a 4-digit PIN.
 - Runs entirely on the church PC. No internet needed during a service.

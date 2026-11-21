@@ -63,6 +63,42 @@ function renderLive() {
 	$("liveText").title = live.text || ""
 }
 
+function songButton(song, extraClass = "") {
+	const button = document.createElement("button")
+	button.type = "button"
+	button.className = `song-btn ${extraClass}`.trim()
+	if (state?.current?.songId === song.id) button.classList.add("active")
+	const name = document.createElement("span")
+	name.textContent = song.name
+	const count = document.createElement("span")
+	count.className = "n"
+	count.textContent = String(song.verseCount)
+	button.append(name, count)
+	button.addEventListener("click", () => loadSong(song.id))
+	return button
+}
+
+function renderSchedule() {
+	const block = $("scheduleBlock")
+	const list = $("scheduleList")
+	const schedule = state?.schedule
+	const items = schedule?.items || []
+
+	if (!items.length) {
+		block.hidden = true
+		list.innerHTML = ""
+		block.title = schedule?.error || ""
+		return
+	}
+
+	block.hidden = false
+	block.title = schedule.error ? `FreeShow project unreachable: ${schedule.error}` : "Songs in FreeShow's current project"
+	$("schedName").textContent = schedule.project || ""
+
+	list.innerHTML = ""
+	for (const item of items) list.appendChild(songButton(item, "sched-btn"))
+}
+
 function renderSongs() {
 	const query = ($("songSearch").value || "").trim().toLowerCase()
 	const songs = (state?.songs || []).filter((song) => !query || song.name.toLowerCase().includes(query))
@@ -76,20 +112,7 @@ function renderSongs() {
 		return
 	}
 
-	for (const song of songs) {
-		const button = document.createElement("button")
-		button.type = "button"
-		button.className = "song-btn"
-		if (state?.current?.songId === song.id) button.classList.add("active")
-		const name = document.createElement("span")
-		name.textContent = song.name
-		const count = document.createElement("span")
-		count.className = "n"
-		count.textContent = String(song.verseCount)
-		button.append(name, count)
-		button.addEventListener("click", () => loadSong(song.id))
-		list.appendChild(button)
-	}
+	for (const song of songs) list.appendChild(songButton(song))
 }
 
 function renderVerses() {
@@ -250,6 +273,7 @@ function render() {
 	if (!state) return
 	renderTranslations()
 	renderLive()
+	renderSchedule()
 	renderSongs()
 	renderVerses()
 	renderSuggestions()
