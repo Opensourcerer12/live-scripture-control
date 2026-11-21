@@ -1,0 +1,68 @@
+{
+  "name": "live-scripture-control",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local control surface for FreeShow scripture (PC + phone)",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "node server/index.mjs",
+    "app": "electron .",
+    "dist": "electron-builder --win",
+    "doctor": "node scripts/doctor.mjs",
+    "new-pc": "node scripts/new-pc.mjs",
+    "copy-church": "node scripts/make-church-copy.mjs",
+    "probe": "node scripts/probe-freeshow.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "electron": "^45.3.4",
+    "electron-builder": "^26.18.0",
+    "socket.io-client": "^4.8.1"
+  },
+  "build": {
+    "appId": "com.livescripture.control",
+    "productName": "Live Scripture Control",
+    "asar": false,
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "server/**/*",
+      "public/**/*",
+      "scripts/**/*",
+      "data/kjv.json",
+      "data/suggestions-cache.json",
+      "data/verse-bindings.json",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Live Scripture Control"
+    }
+  }
+}

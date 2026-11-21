@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# electron-builder output (585 MB of installers and win-unpacked)
+dist/
+
+# this machine's state — config.json holds the song-library path, PIN and paired phones
+config.json
+data/session.json
+data/niv.json
+data/esv.json
+
+# logs and tool state
+*.log
+.freebuff/
+.cloud-attachments/

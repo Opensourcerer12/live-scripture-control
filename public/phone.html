@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="theme-color" content="#090b10" />
+		<title>Live Scripture — Phone</title>
+		<link rel="stylesheet" href="/app.css" />
+	</head>
+	<body class="phone-body">
+		<section id="gate" class="gate" hidden>
+			<h1>Live Scripture</h1>
+			<p class="hint">Enter the 4-digit PIN shown on the church PC.</p>
+			<form id="pinForm">
+				<input id="pinInput" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="••••" />
+				<button class="btn primary big" type="submit">Pair this phone</button>
+			</form>
+			<p id="gateMsg" class="hint"></p>
+		</section>
+
+		<main id="app" class="phone-app" hidden>
+			<header class="phone-top">
+				<span class="live-label">ON SCREEN</span>
+				<span id="lockBadge" class="badge" hidden>Locked by PC</span>
+			</header>
+
+			<div id="liveCard" class="live-card blank">
+				<div id="liveRef" class="live-ref">Nothing on screen</div>
+				<div id="liveText" class="live-text"></div>
+			</div>
+
+			<button id="clearBtn" class="btn clear-big" type="button">CLEAR SCREEN</button>
+
+			<div class="phone-sugg-head">
+				<span>Suggestions</span>
+				<span id="contextLabel" class="count"></span>
+			</div>
+			<div id="suggestionList" class="sugg-list phone"></div>
+
+			<button id="pickerBtn" class="btn ghost wide" type="button">Pick song / verse</button>
+		</main>
+
+		<div id="sheet" class="sheet" hidden>
+			<div class="sheet-inner">
+				<div class="sheet-head">
+					<strong id="sheetTitle">Songs</strong>
+					<button id="sheetClose" class="btn small ghost" type="button">Close</button>
+				</div>
+				<input id="sheetSearch" class="search" placeholder="Search songs" autocomplete="off" />
+				<div id="sheetList" class="list"></div>
+			</div>
+		</div>
+
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/phone.js" type="module"></script>
+	</body>
+</html>

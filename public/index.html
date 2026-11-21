@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Live Scripture — PC</title>
+		<link rel="stylesheet" href="/app.css" />
+	</head>
+	<body class="pc-body">
+		<header class="topbar">
+			<div class="brand"><span id="fsDot" class="dot"></span><span>LIVE SCRIPTURE</span></div>
+			<div class="livebar">
+				<span class="live-label">ON SCREEN</span>
+				<div class="live-main">
+					<strong id="liveRef">Nothing</strong>
+					<span id="liveText" class="live-text"></span>
+				</div>
+			</div>
+			<div class="top-actions">
+				<label class="field">Translation <select id="translation"></select></label>
+				<button id="outputBtn" class="btn ghost" type="button" title="Show or hide FreeShow's live output window">Output —</button>
+				<button id="restoreBtn" class="btn ghost" type="button" title="Bring back the slide Clear removed">Restore</button>
+				<button id="lockBtn" class="btn ghost" type="button">Lock phones</button>
+				<button id="clearBtn" class="btn danger" type="button">Clear screen</button>
+			</div>
+		</header>
+
+		<main class="pc-grid">
+			<section class="panel">
+				<div class="panel-head"><h2>Songs</h2><span id="songCount" class="count"></span></div>
+				<input id="songSearch" class="search" placeholder="Search songs" autocomplete="off" />
+				<div id="songList" class="list"></div>
+			</section>
+
+			<section class="panel">
+				<div class="panel-head"><h2 id="songTitle">Verses</h2><span id="verseCount" class="count"></span></div>
+				<p id="songHint" class="hint">Pick a song to show its verses.</p>
+				<div id="verseList" class="list verse-list"></div>
+			</section>
+
+			<section class="panel stack">
+				<form id="manualForm" class="manual">
+					<div class="panel-head"><h2>Manual reference</h2></div>
+					<div class="row">
+						<input id="manualInput" class="search" placeholder="John 3:16 · Rom 8:28-30" autocomplete="off" />
+						<button class="btn primary" type="submit">Load</button>
+					</div>
+					<div class="row" style="margin-top: 8px">
+						<button id="manualShowBtn" class="btn wide" type="button" disabled>Show loaded passage</button>
+					</div>
+					<p id="manualMsg" class="hint">Loads the passage and its suggestions without touching the screen.</p>
+				</form>
+
+				<div class="suggestions">
+					<div class="panel-head">
+						<h2>Suggestions</h2>
+						<div class="sugg-nav">
+							<span id="suggFor" class="count"></span>
+							<button id="prevSlideBtn" class="btn small ghost" type="button" title="Previous slide of a long passage">◀</button>
+							<button id="nextSlideBtn" class="btn small ghost" type="button" title="Next slide of a long passage">▶</button>
+						</div>
+					</div>
+					<div id="suggestionList" class="sugg-list"></div>
+				</div>
+
+				<footer class="status">
+					<div class="status-row"><span>FreeShow</span><span id="fsStatus">checking…</span></div>
+					<div class="status-row"><span>Output window</span><span id="outputStatus">—</span></div>
+					<div class="status-row"><span>PIN · phones</span><span><strong id="pinValue">—</strong> · <span id="phoneCount">0</span></span></div>
+					<div class="status-row"><span>Phone address</span><span id="phoneUrls" class="mono">—</span></div>
+					<p id="freeshowNote" class="hint" hidden></p>
+				</footer>
+			</section>
+		</main>
+
+		<div id="toast" class="toast" role="status" aria-live="polite"></div>
+		<script src="/pc.js" type="module"></script>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "appPort": 8099,
+  "appHost": "0.0.0.0",
+  "freeshow": {
+    "host": "127.0.0.1",
+    "httpPort": 5505,
+    "restPort": 5506,
+    "showName": "Live Scripture"
+  },
+  "translation": "KJV",
+  "locked": false
+}
