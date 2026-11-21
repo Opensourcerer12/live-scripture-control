@@ -35,8 +35,8 @@ works — see `docs/FREESHOW-API-FINDINGS.md` for what it found on this install.
 
 `npm run dist` builds a Windows app with electron-builder into `dist/`:
 
-- **`Live Scripture Control Setup 1.0.0.exe`** — installer (per user, no admin rights; desktop shortcut).
-- **`live Scripture Control 1.0.0.exe`** — portable build: no install, run it from anywhere.
+- **`Live Scripture Control Setup 1.0.1.exe`** — installer (per user, no admin rights; desktop shortcut).
+- **`Live Scripture Control 1.0.1.exe`** — portable build: no install, run it from anywhere.
 
 The app opens the same PC view in its own window, so the church PC needs **no Node.js install and no
 terminal**. The server runs inside the app on the configured port; the phone view still works at

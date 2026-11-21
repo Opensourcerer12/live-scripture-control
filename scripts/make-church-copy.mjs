@@ -97,5 +97,5 @@ console.log(`  ${(size(TARGET) / 1048576).toFixed(1)} MB, no dist build output, 
 if (installed.length) console.log(`  installers copied: ${installed.join(", ")}`)
 console.log("")
 console.log("  Next on the church PC: open the folder, double-click \"Check setup.cmd\", then \"Start Live Scripture.cmd\".")
-console.log("  (Or install installer\\Live Scripture Control Setup 1.0.0.exe and skip both.)")
+console.log("  (Or install installer\\Live Scripture Control Setup 1.0.1.exe and skip both.)")
 console.log("")
