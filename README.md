@@ -8,6 +8,9 @@ A local web app for the FreeShow PC. It shows the song list, the verses of the c
   always-visible CLEAR, plus a song/verse picker. Phones pair with a 4-digit PIN.
 - Runs entirely on the church PC. No internet needed during a service.
 
+**Download:** the Windows installer and a portable build are on the
+[releases page](https://github.com/Opensourcerer12/live-scripture-control/releases/latest).
+
 ## Run it
 
 On Windows, double-click **`Start Live Scripture.cmd`**. It installs the one dependency the first
